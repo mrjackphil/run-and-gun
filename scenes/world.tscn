@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://cocxh54ch64s5"]
+
+[ext_resource type="PackedScene" uid="uid://c5tsbdo0plwph" path="res://scenes/player.tscn" id="1_dsu1m"]
+[ext_resource type="Script" path="res://scripts/camera_move.gd" id="2_bajsv"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_jbuse"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4oed2"]
+
+[sub_resource type="Sky" id="Sky_yeuyl"]
+sky_material = SubResource("ProceduralSkyMaterial_4oed2")
+
+[sub_resource type="Environment" id="Environment_3njtc"]
+background_mode = 2
+sky = SubResource("Sky_yeuyl")
+ambient_light_source = 3
+reflected_light_source = 2
+
+[node name="World" type="Node3D"]
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera_root") instance=ExtResource("1_dsu1m")]
+SPEED = 150.0
+camera_root = NodePath("Root")
+
+[node name="Root" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("2_bajsv")
+
+[node name="Yaw" type="SpringArm3D" parent="Player/Root"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+shape = SubResource("SeparationRayShape3D_jbuse")
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="Player/Root/Yaw"]
+size = 4.809
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3njtc")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, -0.5, -6.5)
+size = Vector3(20, 1, 20)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -7)
+use_collision = true
+size = Vector3(9, 4, 7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2, -7)
+use_collision = true
+size = Vector3(9, 4, 7)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 3.5, -7)
+use_collision = true
+size = Vector3(2, 1, 7)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 4, 4)
+shadow_enabled = true

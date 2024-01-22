@@ -1,0 +1,89 @@
+[gd_scene load_steps=3 format=3 uid="uid://sc6nb3ij4jjt"]
+
+[sub_resource type="Animation" id="Animation_umn5n"]
+resource_name = "mixamo_com"
+length = 0.0333333
+_compression = {
+"bounds": [AABB(-7.76293e-08, 0.00458084, 0.00774291, 1e-05, 1e-05, 1e-05), AABB(0, 0, 0, 0, 0, 0), AABB(0, 0, 0, 0, 0, 0), AABB(0, 0, 0, 0, 0, 0), AABB(0, 0, 0, 0, 0, 0), AABB(0, 0, 0, 0, 0, 0), AABB(0, 0, 0, 0, 0, 0), AABB(0, 0, 0, 0, 0, 0), AABB(0, 0, 0, 0, 0, 0), AABB(0, 0, 0, 0, 0, 0), AABB(0, 0, 0, 0, 0, 0), AABB(0, 0, 0, 0, 0, 0), AABB(0, 0, 0, 0, 0, 0)],
+"format_version": 1,
+"fps": 120,
+"pages": [{
+"data": PackedByteArray(156, 0, 0, 0, 1, 0, 0, 0, 160, 0, 0, 0, 168, 0, 0, 0, 1, 0, 0, 0, 172, 0, 0, 0, 180, 0, 0, 0, 1, 0, 0, 0, 184, 0, 0, 0, 192, 0, 0, 0, 1, 0, 0, 0, 196, 0, 0, 0, 204, 0, 0, 0, 1, 0, 0, 0, 208, 0, 0, 0, 216, 0, 0, 0, 1, 0, 0, 0, 220, 0, 0, 0, 228, 0, 0, 0, 1, 0, 0, 0, 232, 0, 0, 0, 240, 0, 0, 0, 1, 0, 0, 0, 244, 0, 0, 0, 252, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 8, 1, 0, 0, 1, 0, 0, 0, 12, 1, 0, 0, 20, 1, 0, 0, 1, 0, 0, 0, 24, 1, 0, 0, 32, 1, 0, 0, 1, 0, 0, 0, 36, 1, 0, 0, 44, 1, 0, 0, 1, 0, 0, 0, 48, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 86, 42, 226, 56, 106, 69, 0, 0, 0, 0, 0, 0, 59, 173, 245, 244, 195, 64, 0, 0, 0, 0, 0, 0, 255, 127, 254, 255, 212, 8, 0, 0, 0, 0, 0, 0, 28, 71, 86, 170, 106, 69, 0, 0, 0, 0, 0, 0, 9, 139, 59, 45, 195, 64, 0, 0, 0, 0, 0, 0, 255, 127, 0, 0, 212, 8, 0, 0, 0, 0, 0, 0, 213, 254, 243, 129, 101, 115, 0, 0, 0, 0, 0, 0, 42, 222, 33, 140, 70, 7, 0, 0, 0, 0, 0, 0, 9, 0, 53, 125, 246, 45, 0, 0, 0, 0, 0, 0, 10, 254, 214, 126, 101, 115, 0, 0, 0, 0, 0, 0, 221, 243, 43, 94, 71, 7, 0, 0, 0, 0, 0, 0, 201, 2, 8, 128, 246, 45, 0, 0),
+"time_offset": 0.0
+}]
+}
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("RootNode/low poly base mesh")
+tracks/0/compressed_track = 0
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("RootNode/low poly base mesh/Skeleton3D:shoulder.L")
+tracks/1/compressed_track = 1
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("RootNode/low poly base mesh/Skeleton3D:upper_arm.L")
+tracks/2/compressed_track = 2
+tracks/3/type = "rotation_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("RootNode/low poly base mesh/Skeleton3D:forearm.L")
+tracks/3/compressed_track = 3
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("RootNode/low poly base mesh/Skeleton3D:shoulder.R")
+tracks/4/compressed_track = 4
+tracks/5/type = "rotation_3d"
+tracks/5/imported = true
+tracks/5/enabled = true
+tracks/5/path = NodePath("RootNode/low poly base mesh/Skeleton3D:upper_arm.R")
+tracks/5/compressed_track = 5
+tracks/6/type = "rotation_3d"
+tracks/6/imported = true
+tracks/6/enabled = true
+tracks/6/path = NodePath("RootNode/low poly base mesh/Skeleton3D:forearm.R")
+tracks/6/compressed_track = 6
+tracks/7/type = "rotation_3d"
+tracks/7/imported = true
+tracks/7/enabled = true
+tracks/7/path = NodePath("RootNode/low poly base mesh/Skeleton3D:thigh.L")
+tracks/7/compressed_track = 7
+tracks/8/type = "rotation_3d"
+tracks/8/imported = true
+tracks/8/enabled = true
+tracks/8/path = NodePath("RootNode/low poly base mesh/Skeleton3D:shin.L")
+tracks/8/compressed_track = 8
+tracks/9/type = "rotation_3d"
+tracks/9/imported = true
+tracks/9/enabled = true
+tracks/9/path = NodePath("RootNode/low poly base mesh/Skeleton3D:foot.L")
+tracks/9/compressed_track = 9
+tracks/10/type = "rotation_3d"
+tracks/10/imported = true
+tracks/10/enabled = true
+tracks/10/path = NodePath("RootNode/low poly base mesh/Skeleton3D:thigh.R")
+tracks/10/compressed_track = 10
+tracks/11/type = "rotation_3d"
+tracks/11/imported = true
+tracks/11/enabled = true
+tracks/11/path = NodePath("RootNode/low poly base mesh/Skeleton3D:shin.R")
+tracks/11/compressed_track = 11
+tracks/12/type = "rotation_3d"
+tracks/12/imported = true
+tracks/12/enabled = true
+tracks/12/path = NodePath("RootNode/low poly base mesh/Skeleton3D:foot.R")
+tracks/12/compressed_track = 12
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hpjeh"]
+_data = {
+"mixamo_com": SubResource("Animation_umn5n")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer"]
+libraries = {
+"": SubResource("AnimationLibrary_hpjeh")
+}
