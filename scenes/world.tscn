@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cocxh54ch64s5"]
+[gd_scene load_steps=8 format=3 uid="uid://cocxh54ch64s5"]
 
 [ext_resource type="PackedScene" uid="uid://c5tsbdo0plwph" path="res://scenes/player.tscn" id="1_dsu1m"]
 [ext_resource type="Script" path="res://scripts/camera_move.gd" id="2_bajsv"]
+[ext_resource type="PackedScene" uid="uid://x13yo1bw52t4" path="res://scenes/cursor.tscn" id="3_58omq"]
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_jbuse"]
 
@@ -18,9 +19,10 @@ reflected_light_source = 2
 
 [node name="World" type="Node3D"]
 
-[node name="Player" parent="." node_paths=PackedStringArray("camera_root") instance=ExtResource("1_dsu1m")]
+[node name="Player" parent="." node_paths=PackedStringArray("camera_root", "cursor") instance=ExtResource("1_dsu1m")]
 SPEED = 150.0
 camera_root = NodePath("Root")
+cursor = NodePath("../Cursor")
 
 [node name="Root" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -37,25 +39,31 @@ size = 4.809
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_3njtc")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, -0.5, -6.5)
-size = Vector3(20, 1, 20)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 4, 4)
+shadow_enabled = true
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="Level" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.5, -4)
+use_collision = true
+size = Vector3(55, 1, 23)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -7)
 use_collision = true
 size = Vector3(9, 4, 7)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 2, -7)
 use_collision = true
 size = Vector3(9, 4, 7)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+[node name="CSGBox3D4" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 3.5, -7)
 use_collision = true
 size = Vector3(2, 1, 7)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 4, 4)
-shadow_enabled = true
+[node name="Cursor" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("3_58omq")]
+camera = NodePath("../Player/Root/Yaw/Camera3D")

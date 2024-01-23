@@ -25,7 +25,9 @@ func _input(event):
 				return
 
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-			var camera_rotation = yaw.rotation.x - event.relative.y / CAMERA_ROTATION_SENSITIVITY
 			rotation.y -= event.relative.x / CAMERA_ROTATION_SENSITIVITY
-			yaw.rotation.x = clamp(camera_rotation, -1, 1)
+
+			# var camera_rotation = yaw.rotation.x - event.relative.y / CAMERA_ROTATION_SENSITIVITY
+			# yaw.rotation.x = clamp(camera_rotation, -1, 1)
+
 

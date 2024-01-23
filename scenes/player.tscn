@@ -73,7 +73,7 @@ script = ExtResource("1_x5qtn")
 [node name="Root Scene" parent="." instance=ExtResource("1_sbfn7")]
 
 [node name="low poly base mesh" parent="Root Scene/RootNode" index="0"]
-transform = Transform3D(72.8703, 68.2537, 5.5996, -0.224932, -7.93806, 99.6841, 68.4825, -72.6529, -5.63096, -0.0472899, -0.0579766, 0.0433877)
+transform = Transform3D(72.8703, 68.2538, 5.59949, -0.224928, -7.93791, 99.6841, 68.4826, -72.6528, -5.63084, -0.0472899, -0.0579766, 0.0433877)
 
 [node name="Skeleton3D" parent="Root Scene/RootNode/low poly base mesh" index="0"]
 bones/0/rotation = Quaternion(0.790455, 0, 0, 0.61252)
