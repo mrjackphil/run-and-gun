@@ -3,19 +3,19 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ch5ojjn28jt8t"
-path="res://.godot/imported/mesh.fbx-e2e51eec3971ce3c8ff0021a66af2ff2.scn"
+uid="uid://bad3b2l7djhlj"
+path="res://.godot/imported/mesh_blender.fbx-ba73eb13c877ad8ce250ac3222f4942b.scn"
 
 [deps]
 
-source_file="res://assets/raw/3d/humanoid/mesh.fbx"
-dest_files=["res://.godot/imported/mesh.fbx-e2e51eec3971ce3c8ff0021a66af2ff2.scn"]
+source_file="res://assets/fbx/mesh_blender.fbx"
+dest_files=["res://.godot/imported/mesh_blender.fbx-ba73eb13c877ad8ce250ac3222f4942b.scn"]
 
 [params]
 
 nodes/root_type=""
 nodes/root_name=""
-nodes/apply_root_scale=true
+nodes/apply_root_scale=false
 nodes/root_scale=1.0
 meshes/ensure_tangents=true
 meshes/generate_lods=true
@@ -29,13 +29,6 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={
-"nodes": {
-"PATH:AnimationPlayer": {
-"compression/enabled": true,
-"import/skip_import": true
-}
-}
-}
+_subresources={}
 gltf/naming_version=1
 gltf/embedded_image_handling=1

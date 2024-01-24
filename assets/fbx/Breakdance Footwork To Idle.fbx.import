@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dmro75m5f3rtn"
-path="res://.godot/imported/Left Strafe Walking.fbx-ad22906453ebe19a7670fba621373491.scn"
+uid="uid://beuc5r0wlqlfo"
+path="res://.godot/imported/Breakdance Footwork To Idle.fbx-9ac547810f28d699f67affe04042c56d.scn"
 
 [deps]
 
-source_file="res://assets/raw/3d/humanoid/Left Strafe Walking.fbx"
-dest_files=["res://.godot/imported/Left Strafe Walking.fbx-ad22906453ebe19a7670fba621373491.scn"]
+source_file="res://assets/fbx/Breakdance Footwork To Idle.fbx"
+dest_files=["res://.godot/imported/Breakdance Footwork To Idle.fbx-9ac547810f28d699f67affe04042c56d.scn"]
 
 [params]
 
@@ -34,7 +34,7 @@ _subresources={
 "mixamo_com": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://humanoid/anims/walk_left.res",
+"save_to_file/path": "res://humanoid/anims/dance.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,

@@ -1,0 +1,43 @@
+[gd_scene load_steps=15 format=3 uid="uid://sc6nb3ij4jjt"]
+
+[ext_resource type="Animation" uid="uid://umfxwukbqxhw" path="res://assets/animations/idle.res" id="1_35v4v"]
+[ext_resource type="Animation" uid="uid://c6mcd70ganu7q" path="res://assets/animations/run.res" id="2_dw4q3"]
+[ext_resource type="Animation" uid="uid://qbfbd4irswge" path="res://assets/animations/shoot.res" id="3_hvjta"]
+[ext_resource type="Animation" uid="uid://sp71qa0fjt5g" path="res://assets/animations/walk.res" id="4_lh5s1"]
+[ext_resource type="Animation" uid="uid://bev261y20i476" path="res://assets/animations/walk_back.res" id="5_n22jy"]
+[ext_resource type="Animation" uid="uid://dfui87ww8f4j0" path="res://assets/animations/walk_left.res" id="6_5pn8a"]
+[ext_resource type="Animation" uid="uid://ciegxftbdvca5" path="res://assets/animations/walk_right.res" id="7_yavfa"]
+[ext_resource type="Animation" uid="uid://byx3xvyt8jv5k" path="res://assets/animations/die1.res" id="8_q6un8"]
+[ext_resource type="Animation" uid="uid://ctalroukvh0v" path="res://assets/animations/die2.res" id="9_t076q"]
+[ext_resource type="Animation" uid="uid://dlq3qrpsgefih" path="res://assets/animations/die3.res" id="10_qxobg"]
+[ext_resource type="Animation" uid="uid://3tn1e4rbkpp1" path="res://assets/animations/dance.res" id="11_ocrsx"]
+
+[sub_resource type="Animation" id="Animation_7qo7p"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1q5ci"]
+_data = {
+"RESET": SubResource("Animation_7qo7p")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_03fqm"]
+_data = {
+"dance": ExtResource("11_ocrsx"),
+"die1": ExtResource("8_q6un8"),
+"die2": ExtResource("9_t076q"),
+"die3": ExtResource("10_qxobg"),
+"idle": ExtResource("1_35v4v"),
+"run": ExtResource("2_dw4q3"),
+"shoot": ExtResource("3_hvjta"),
+"walk": ExtResource("4_lh5s1"),
+"walk_back": ExtResource("5_n22jy"),
+"walk_left": ExtResource("6_5pn8a"),
+"walk_right": ExtResource("7_yavfa")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer"]
+root_motion_track = NodePath("RootNode/low poly base mesh/Skeleton3D:spine")
+libraries = {
+"": SubResource("AnimationLibrary_1q5ci"),
+"humanoid": SubResource("AnimationLibrary_03fqm")
+}

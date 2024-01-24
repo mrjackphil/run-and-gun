@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cocxh54ch64s5"]
+[gd_scene load_steps=12 format=3 uid="uid://cocxh54ch64s5"]
 
 [ext_resource type="PackedScene" uid="uid://c5tsbdo0plwph" path="res://scenes/player.tscn" id="1_dsu1m"]
 [ext_resource type="Script" path="res://scripts/camera_move.gd" id="2_bajsv"]
 [ext_resource type="PackedScene" uid="uid://x13yo1bw52t4" path="res://scenes/cursor.tscn" id="3_58omq"]
+[ext_resource type="Script" path="res://scripts/door_interactable.gd" id="4_xrlpm"]
+[ext_resource type="Shader" path="res://assets/shaders/interactable.gdshader" id="4_yhg4j"]
+[ext_resource type="PackedScene" uid="uid://ohqphvq2oxdi" path="res://scenes/enemy.tscn" id="6_elvsp"]
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_jbuse"]
 
@@ -17,10 +20,15 @@ sky = SubResource("Sky_yeuyl")
 ambient_light_source = 3
 reflected_light_source = 2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lam1r"]
+render_priority = 0
+shader = ExtResource("4_yhg4j")
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/shadow_thickness = 0.0
+
 [node name="World" type="Node3D"]
 
 [node name="Player" parent="." node_paths=PackedStringArray("camera_root", "cursor") instance=ExtResource("1_dsu1m")]
-SPEED = 150.0
 camera_root = NodePath("Root")
 cursor = NodePath("../Cursor")
 
@@ -46,9 +54,9 @@ shadow_enabled = true
 [node name="Level" type="Node3D" parent="."]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -0.5, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, -0.5, -63)
 use_collision = true
-size = Vector3(55, 1, 23)
+size = Vector3(995, 1, 1023)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -7)
@@ -67,3 +75,23 @@ size = Vector3(2, 1, 7)
 
 [node name="Cursor" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("3_58omq")]
 camera = NodePath("../Player/Root/Yaw/Camera3D")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." node_paths=PackedStringArray("geometry_instance_3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1.45, -4)
+material_overlay = SubResource("ShaderMaterial_lam1r")
+use_collision = true
+size = Vector3(2, 3.1, 1)
+script = ExtResource("4_xrlpm")
+geometry_instance_3d = NodePath(".")
+
+[node name="_NPC2" parent="." instance=ExtResource("6_elvsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+
+[node name="_NPC3" parent="." instance=ExtResource("6_elvsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="_NPC4" parent="." instance=ExtResource("6_elvsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+
+[node name="_NPC" parent="." instance=ExtResource("6_elvsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)

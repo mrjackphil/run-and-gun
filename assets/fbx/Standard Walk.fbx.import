@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://x6y4w5gwyhth"
-path="res://.godot/imported/Walking Backwards.fbx-6957e73bab409dfa3d50a139acd58ecb.scn"
+uid="uid://u46nypd2x836"
+path="res://.godot/imported/Standard Walk.fbx-1f1d2076b5b2af966fdc7fedce278411.scn"
 
 [deps]
 
-source_file="res://assets/raw/3d/humanoid/Walking Backwards.fbx"
-dest_files=["res://.godot/imported/Walking Backwards.fbx-6957e73bab409dfa3d50a139acd58ecb.scn"]
+source_file="res://assets/fbx/Standard Walk.fbx"
+dest_files=["res://.godot/imported/Standard Walk.fbx-1f1d2076b5b2af966fdc7fedce278411.scn"]
 
 [params]
 
@@ -34,7 +34,7 @@ _subresources={
 "mixamo_com": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://assets/raw/3d/humanoid/walk_back.res",
+"save_to_file/path": "res://assets/raw/3d/humanoid/walk.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,

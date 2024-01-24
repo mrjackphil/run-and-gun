@@ -1,56 +1,34 @@
-[gd_scene load_steps=21 format=3 uid="uid://c5tsbdo0plwph"]
+[gd_scene load_steps=13 format=3 uid="uid://c5tsbdo0plwph"]
 
-[ext_resource type="PackedScene" uid="uid://ch5ojjn28jt8t" path="res://assets/raw/3d/humanoid/mesh.fbx" id="1_sbfn7"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_x5qtn"]
-[ext_resource type="PackedScene" uid="uid://sc6nb3ij4jjt" path="res://humanoid/animation_player.tscn" id="2_w51t4"]
-[ext_resource type="Animation" uid="uid://sp71qa0fjt5g" path="res://humanoid/anims/walk.res" id="3_pdt00"]
-[ext_resource type="Animation" uid="uid://umfxwukbqxhw" path="res://humanoid/anims/idle.res" id="4_1gpd6"]
-[ext_resource type="Animation" uid="uid://bev261y20i476" path="res://humanoid/anims/walk_back.res" id="5_an67f"]
-[ext_resource type="Animation" uid="uid://dfui87ww8f4j0" path="res://humanoid/anims/walk_left.res" id="6_0o257"]
-[ext_resource type="Animation" uid="uid://ciegxftbdvca5" path="res://humanoid/anims/walk_right.res" id="7_avgha"]
+[ext_resource type="PackedScene" uid="uid://ch5ojjn28jt8t" path="res://assets/fbx/mesh.fbx" id="2_67pnq"]
+[ext_resource type="PackedScene" uid="uid://sc6nb3ij4jjt" path="res://scenes/animation_player.tscn" id="3_jcu5w"]
 
-[sub_resource type="Animation" id="Animation_7qo7p"]
-length = 0.001
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1q5ci"]
-_data = {
-"RESET": SubResource("Animation_7qo7p")
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_03fqm"]
-_data = {
-"idle": ExtResource("4_1gpd6"),
-"walk": ExtResource("3_pdt00"),
-"walk_back": ExtResource("5_an67f"),
-"walk_left": ExtResource("6_0o257"),
-"walk_right": ExtResource("7_avgha")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c18gp"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ape8n"]
 animation = &"humanoid/walk"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dco4l"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_djodg"]
 animation = &"humanoid/walk_back"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xvoel"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c03oh"]
 animation = &"humanoid/walk_left"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6ffao"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fa1dy"]
 animation = &"humanoid/walk_right"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hd5s8"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x6hqi"]
 animation = &"humanoid/idle"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_y23lm"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_c18gp")
+blend_point_0/node = SubResource("AnimationNodeAnimation_ape8n")
 blend_point_0/pos = Vector2(0, 1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_dco4l")
+blend_point_1/node = SubResource("AnimationNodeAnimation_djodg")
 blend_point_1/pos = Vector2(0, -1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_xvoel")
+blend_point_2/node = SubResource("AnimationNodeAnimation_c03oh")
 blend_point_2/pos = Vector2(1, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_6ffao")
+blend_point_3/node = SubResource("AnimationNodeAnimation_fa1dy")
 blend_point_3/pos = Vector2(-1, 0)
-blend_point_4/node = SubResource("AnimationNodeAnimation_hd5s8")
+blend_point_4/node = SubResource("AnimationNodeAnimation_x6hqi")
 blend_point_4/pos = Vector2(0, 0)
 sync = true
 
@@ -70,30 +48,29 @@ height = 1.2
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_x5qtn")
 
-[node name="Root Scene" parent="." instance=ExtResource("1_sbfn7")]
+[node name="Root Scene" parent="." instance=ExtResource("2_67pnq")]
 
 [node name="low poly base mesh" parent="Root Scene/RootNode" index="0"]
-transform = Transform3D(72.8703, 68.2538, 5.59949, -0.224928, -7.93791, 99.6841, 68.4826, -72.6528, -5.63084, -0.0472899, -0.0579766, 0.0433877)
+transform = Transform3D(72.8761, 68.2444, 5.63672, -0.23773, -7.97941, 99.6807, 68.4763, -72.657, -5.65284, -0.0476216, -0.0577538, 0.0438372)
 
 [node name="Skeleton3D" parent="Root Scene/RootNode/low poly base mesh" index="0"]
 bones/0/rotation = Quaternion(0.790455, 0, 0, 0.61252)
-bones/1/rotation = Quaternion(-0.0146978, 0.0397922, -0.0138334, 0.999004)
-bones/2/rotation = Quaternion(0.0226247, 0.0800248, -0.0219493, 0.996294)
-bones/3/rotation = Quaternion(0.101316, 0.0815102, -0.0157824, 0.991384)
-bones/4/rotation = Quaternion(0.19052, -0.00344703, 0.00112267, 0.981677)
-bones/5/rotation = Quaternion(-0.106238, -0.00330575, 0.00148816, 0.994334)
-bones/7/rotation = Quaternion(-0.576537, -0.376087, -0.331237, 0.645326)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/rotation = Quaternion(-0.0644765, 0, 0, 0.997919)
+bones/2/rotation = Quaternion(-0.0774642, 0, 0, 0.996995)
+bones/4/rotation = Quaternion(0.201738, 0, 0, 0.97944)
+bones/7/rotation = Quaternion(-0.605155, -0.345862, -0.356134, 0.622363)
 bones/7/scale = Vector3(1, 1, 1)
-bones/8/rotation = Quaternion(-0.317129, 0.522824, -0.592467, 0.524468)
+bones/8/rotation = Quaternion(-0.275723, 0.667487, -0.477326, 0.500597)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/rotation = Quaternion(0.409436, 0.157084, 0.00210986, 0.898711)
+bones/9/rotation = Quaternion(0.211651, 0.105714, -0.0134058, 0.971519)
 bones/10/rotation = Quaternion(-0.114649, -0.0235309, -0.0666409, 0.990889)
 bones/10/scale = Vector3(1, 1, 1)
-bones/11/rotation = Quaternion(-0.556312, 0.411403, 0.387393, 0.609255)
+bones/11/rotation = Quaternion(-0.605155, 0.345862, 0.356134, 0.622363)
 bones/11/scale = Vector3(1, 1, 1)
-bones/12/rotation = Quaternion(-0.431834, -0.595589, 0.399044, 0.547319)
+bones/12/rotation = Quaternion(-0.275723, -0.667487, 0.477326, 0.500597)
 bones/12/scale = Vector3(1, 1, 1)
-bones/13/rotation = Quaternion(0.359839, -0.0780936, 0.0558071, 0.928064)
+bones/13/rotation = Quaternion(0.211651, -0.105714, 0.0134058, 0.971519)
 bones/14/rotation = Quaternion(-0.114649, 0.0235309, 0.0666409, 0.990889)
 bones/14/scale = Vector3(1, 1, 1)
 bones/15/rotation = Quaternion(5.41635e-08, 0.696936, 0.717133, 5.26393e-08)
@@ -104,40 +81,30 @@ bones/19/rotation = Quaternion(-0.152455, -0.793331, -0.285504, 0.515627)
 bones/19/scale = Vector3(1, 1, 1)
 bones/20/rotation = Quaternion(-0.152455, 0.793331, 0.285504, 0.515627)
 bones/20/scale = Vector3(1, 1, 1)
-bones/21/rotation = Quaternion(0.922757, 0.101486, -0.0962427, 0.359108)
+bones/21/rotation = Quaternion(0.983548, 0.0686415, -0.0113836, 0.166711)
 bones/21/scale = Vector3(1, 1, 1)
-bones/22/rotation = Quaternion(0.36162, 0.127356, 0.0543726, 0.921984)
-bones/23/rotation = Quaternion(-0.567724, -0.0296428, 0.0425283, 0.821585)
+bones/22/rotation = Quaternion(0.0859587, 0.0108514, 0.0198477, 0.996042)
+bones/23/rotation = Quaternion(-0.522954, -0.02673, 0.041999, 0.850906)
 bones/23/scale = Vector3(1, 1, 1)
 bones/24/rotation = Quaternion(1.12295e-07, 0.961249, -0.275683, 4.18381e-07)
 bones/25/rotation = Quaternion(0.679705, 0.679706, -0.194936, 0.194937)
 bones/25/scale = Vector3(1, 1, 1)
-bones/26/rotation = Quaternion(0.967176, -0.121103, 0.14259, 0.171965)
+bones/26/rotation = Quaternion(0.983548, -0.0686415, 0.0113836, 0.166711)
 bones/26/scale = Vector3(1, 1, 1)
-bones/27/rotation = Quaternion(0.35797, 0.0633529, 0.00553194, 0.931565)
-bones/28/rotation = Quaternion(-0.67063, 0.0711588, -0.11925, 0.728678)
+bones/27/rotation = Quaternion(0.0859587, -0.0108514, -0.0198477, 0.996042)
+bones/28/rotation = Quaternion(-0.522954, 0.02673, -0.041999, 0.850906)
 bones/28/scale = Vector3(1, 1, 1)
 bones/29/rotation = Quaternion(-1.12295e-07, 0.961249, -0.275683, -4.18381e-07)
 bones/30/rotation = Quaternion(-0.679705, 0.679706, -0.194936, -0.194937)
 bones/30/scale = Vector3(1, 1, 1)
 
-[node name="AnimationPlayer" parent="Root Scene" instance=ExtResource("2_w51t4")]
-root_motion_track = NodePath("RootNode/low poly base mesh/Skeleton3D:spine")
-libraries = {
-"": SubResource("AnimationLibrary_1q5ci"),
-"humanoid": SubResource("AnimationLibrary_03fqm")
-}
-
 [node name="AnimationTree" type="AnimationTree" parent="Root Scene"]
 active = false
 root_motion_track = NodePath("RootNode/low poly base mesh/Skeleton3D:spine")
-libraries = {
-"": SubResource("AnimationLibrary_1q5ci"),
-"humanoid": SubResource("AnimationLibrary_03fqm")
-}
 tree_root = SubResource("AnimationNodeStateMachine_10mg5")
-anim_player = NodePath("../AnimationPlayer")
 parameters/Walk/blend_position = Vector2(0, 0)
+
+[node name="AnimationPlayer" parent="Root Scene" instance=ExtResource("3_jcu5w")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)

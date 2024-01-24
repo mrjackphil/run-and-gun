@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dsq5n4c7hj64"
-path="res://.godot/imported/Idle.fbx-723025fac17f3bed55fdb8f0cbf3bf87.scn"
+uid="uid://dea241s8bn7g1"
+path="res://.godot/imported/Right Strafe Walking.fbx-c96eefae697fe64efb29359db48bbf89.scn"
 
 [deps]
 
-source_file="res://assets/raw/3d/humanoid/Idle.fbx"
-dest_files=["res://.godot/imported/Idle.fbx-723025fac17f3bed55fdb8f0cbf3bf87.scn"]
+source_file="res://assets/fbx/Right Strafe Walking.fbx"
+dest_files=["res://.godot/imported/Right Strafe Walking.fbx-c96eefae697fe64efb29359db48bbf89.scn"]
 
 [params]
 
@@ -34,7 +34,7 @@ _subresources={
 "mixamo_com": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "res://assets/raw/3d/humanoid/idle.res",
+"save_to_file/path": "res://humanoid/anims/walk_right.res",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,

@@ -2,11 +2,6 @@ extends Node3D
 
 @export var camera: Camera3D
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	_move_to_cursor()
@@ -21,8 +16,17 @@ func _move_to_cursor():
 	ray_query.from = from
 	ray_query.to = to
 	ray_query.collide_with_areas = true
-	var raycast_result = space.intersect_ray(ray_query)
+	var raycast_result := space.intersect_ray(ray_query)
 
 	if raycast_result.has("position"):
 		position = raycast_result.position
 		position.y = 0
+
+	if raycast_result.has("collider"):
+		var collider = raycast_result.collider
+
+		if collider.has_method("highlight"):
+			collider.call("highlight")
+		
+		if collider.has_method("interact") and Input.is_action_just_pressed("interact"):
+			collider.call("interact")

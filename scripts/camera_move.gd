@@ -6,24 +6,10 @@ const CAMERA_ROTATION_SENSITIVITY = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
 func _input(event):
-	if event is InputEventMouseButton:
-		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-
 	if event is InputEventMouseMotion:
-		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
-				return
-
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 			rotation.y -= event.relative.x / CAMERA_ROTATION_SENSITIVITY
 
