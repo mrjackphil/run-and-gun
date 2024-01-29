@@ -1,4 +1,5 @@
 extends Node3D
+class_name Bullet
 
 var timer := Timer.new()
 @onready var area3d := $Area3D
@@ -23,7 +24,7 @@ func _on_timer_timeout():
 func _process(delta):
 	position += transform.basis.z * SPEED * delta
 
-func _on_area_entered():
+func _on_area_entered(_area):
 	queue_free()
 
 func _on_body_entered(body):

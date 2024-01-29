@@ -29,6 +29,7 @@ shader_parameter/shadow_thickness = 0.0
 [node name="World" type="Node3D"]
 
 [node name="Player" parent="." node_paths=PackedStringArray("camera_root", "cursor") instance=ExtResource("1_dsu1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
 camera_root = NodePath("Root")
 cursor = NodePath("../Cursor")
 
@@ -73,6 +74,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 3.5, -7)
 use_collision = true
 size = Vector3(2, 1, 7)
 
+[node name="CSGBox3D5" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
+use_collision = true
+size = Vector3(1, 3, 1)
+
 [node name="Cursor" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("3_58omq")]
 camera = NodePath("../Player/Root/Yaw/Camera3D")
 
@@ -84,14 +90,5 @@ size = Vector3(2, 3.1, 1)
 script = ExtResource("4_xrlpm")
 geometry_instance_3d = NodePath(".")
 
-[node name="_NPC2" parent="." instance=ExtResource("6_elvsp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
-
-[node name="_NPC3" parent="." instance=ExtResource("6_elvsp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-
-[node name="_NPC4" parent="." instance=ExtResource("6_elvsp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
-
-[node name="_NPC" parent="." instance=ExtResource("6_elvsp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+[node name="NPC" parent="." instance=ExtResource("6_elvsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
