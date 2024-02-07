@@ -1,8 +1,45 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5tsbdo0plwph"]
+[gd_scene load_steps=19 format=3 uid="uid://c5tsbdo0plwph"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_x5qtn"]
 [ext_resource type="PackedScene" uid="uid://ch5ojjn28jt8t" path="res://assets/fbx/mesh.fbx" id="2_67pnq"]
 [ext_resource type="PackedScene" uid="uid://sc6nb3ij4jjt" path="res://scenes/animation_player.tscn" id="3_jcu5w"]
+[ext_resource type="Script" path="res://scripts/input_synchronizer.gd" id="4_fpufp"]
+[ext_resource type="Script" path="res://scripts/camera_move.gd" id="5_nq3xg"]
+[ext_resource type="PackedScene" uid="uid://x13yo1bw52t4" path="res://scenes/cursor.tscn" id="6_8h4dw"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qiaqt"]
+properties/0/path = NodePath(".:playerID")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:state")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Root Scene/AnimationPlayer:current_animation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:is_shooting")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q6f7p"]
+properties/0/path = NodePath("InputSynchronizer:is_running")
+properties/0/spawn = false
+properties/0/replication_mode = 1
+properties/1/path = NodePath("InputSynchronizer:is_dodging")
+properties/1/spawn = false
+properties/1/replication_mode = 1
+properties/2/path = NodePath("InputSynchronizer:is_shooting")
+properties/2/spawn = false
+properties/2/replication_mode = 1
+properties/3/path = NodePath("InputSynchronizer:input_movement")
+properties/3/spawn = false
+properties/3/replication_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ape8n"]
 animation = &"humanoid/walk"
@@ -45,18 +82,27 @@ transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition
 radius = 0.2
 height = 1.2
 
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_wk76f"]
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
 script = ExtResource("1_x5qtn")
 
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_qiaqt")
+
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="." node_paths=PackedStringArray("player")]
+replication_config = SubResource("SceneReplicationConfig_q6f7p")
+script = ExtResource("4_fpufp")
+player = NodePath("..")
+
 [node name="Root Scene" parent="." instance=ExtResource("2_67pnq")]
 
 [node name="low poly base mesh" parent="Root Scene/RootNode" index="0"]
-transform = Transform3D(67.4978, 73.7598, 1.87968, -0.824168, -1.79369, 99.9804, 73.7791, -67.5002, -0.602795, -0.0208149, -0.0503378, -0.332647)
+transform = Transform3D(67.5009, 73.7573, 1.86778, -0.818853, -1.78246, 99.9805, 73.7763, -67.5033, -0.599214, -0.0208149, -0.0503378, -0.332647)
 
 [node name="Skeleton3D" parent="Root Scene/RootNode/low poly base mesh" index="0"]
 bones/0/rotation = Quaternion(0.790455, 0, 0, 0.61252)
-bones/0/scale = Vector3(1, 1, 1)
 bones/1/rotation = Quaternion(-0.0256927, 0.0398814, -0.0211425, 0.99865)
 bones/2/rotation = Quaternion(0.000339679, 0.0825278, -0.0327174, 0.996052)
 bones/3/rotation = Quaternion(0.0791127, 0.0847715, -0.0263642, 0.992905)
@@ -112,5 +158,23 @@ parameters/Walk/blend_position = Vector2(0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("CapsuleShape3D_4n2j8")
+
+[node name="CameraRoot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("5_nq3xg")
+
+[node name="Yaw" type="SpringArm3D" parent="CameraRoot"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+shape = SubResource("SeparationRayShape3D_wk76f")
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraRoot/Yaw"]
+size = 4.809
+
+[node name="Cursor" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("6_8h4dw")]
+visible = false
+camera = NodePath("../CameraRoot/Yaw/Camera3D")
+
+[connection signal="shooting" from="InputSynchronizer" to="." method="_on_input_synchronizer_shooting"]
 
 [editable path="Root Scene"]

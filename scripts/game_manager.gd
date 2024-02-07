@@ -3,8 +3,10 @@ extends Node
 var player: Player = null
 var enemy := preload("res://scenes/enemy.tscn")
 
-func _ready():
+
+func run():
 	_spawner_init()
+
 
 func _input(event):
 	if event.is_action_pressed("restart_game"):

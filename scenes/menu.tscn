@@ -1,0 +1,98 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo7f4tdqa7uik"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_x7plp"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x7plp")
+
+[node name="GameStartContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.5
+offset_top = -100.5
+offset_right = 210.5
+offset_bottom = 100.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="NameContainer" type="HBoxContainer" parent="GameStartContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="GameStartContainer/NameContainer"]
+layout_mode = 2
+text = "Your Name"
+
+[node name="NameEdit" type="LineEdit" parent="GameStartContainer/NameContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Some Name"
+context_menu_enabled = false
+
+[node name="LauncherContainer" type="HBoxContainer" parent="GameStartContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HostContainer" type="VBoxContainer" parent="GameStartContainer/LauncherContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="GameStartContainer/LauncherContainer/HostContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HostLabel" type="Label" parent="GameStartContainer/LauncherContainer/HostContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Host your game"
+horizontal_alignment = 1
+
+[node name="HostButton" type="Button" parent="GameStartContainer/LauncherContainer/HostContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Host Game"
+
+[node name="ConnectContainer" type="VBoxContainer" parent="GameStartContainer/LauncherContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="GameStartContainer/LauncherContainer/ConnectContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ConnectLabel" type="Label" parent="GameStartContainer/LauncherContainer/ConnectContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Connect to another game"
+horizontal_alignment = 1
+
+[node name="IPHostContainer" type="HBoxContainer" parent="GameStartContainer/LauncherContainer/ConnectContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="IPLabel" type="Label" parent="GameStartContainer/LauncherContainer/ConnectContainer/PanelContainer/IPHostContainer"]
+layout_mode = 2
+text = "Host IP"
+
+[node name="IPEdit" type="LineEdit" parent="GameStartContainer/LauncherContainer/ConnectContainer/PanelContainer/IPHostContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "localhost:9988"
+
+[node name="ConnectButton" type="Button" parent="GameStartContainer/LauncherContainer/ConnectContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Connect"
+
+[connection signal="pressed" from="GameStartContainer/LauncherContainer/HostContainer/PanelContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="GameStartContainer/LauncherContainer/ConnectContainer/PanelContainer/ConnectButton" to="." method="_on_connect_button_pressed"]

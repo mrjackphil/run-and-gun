@@ -5,8 +5,8 @@ class_name Player
 @export var RUN_SPEED := 400.0
 const ROTATION_SPEED := 0.1
 
-@export var camera_root: Node3D
-@export var cursor : Node3D
+@onready var camera_root: Node3D = $CameraRoot
+@onready var cursor : Node3D = $Cursor
 
 @onready var anim_tree : AnimationTree = $"Root Scene/AnimationTree"
 @onready var anim_player : AnimationPlayer = $"Root Scene/AnimationPlayer"
@@ -14,7 +14,7 @@ const ROTATION_SPEED := 0.1
 
 @onready var bullet := preload("res://scenes/bullet.tscn")
 
-var is_shooting = true : set = _set_moving_state, get = _get_moving_state
+@export var is_shooting = true : set = _set_moving_state, get = _get_moving_state
 var shoot_timer = Timer.new()
 
 var run_velocity := Vector3.ZERO
@@ -33,9 +33,22 @@ enum MovingState {
 	DIE
 }
 
-var state := MovingState.IDLE
+@export var state := MovingState.IDLE
+
+@onready var _input: InputSynchronizer = $InputSynchronizer
+
+@export var playerID := 1 :
+	set(id):
+		playerID = id
+		$InputSynchronizer.set_multiplayer_authority(id)
+		$Cursor.set_multiplayer_authority(id)
+
 
 func _ready():
+	if playerID == multiplayer.get_unique_id():
+		$CameraRoot/Yaw/Camera3D.make_current()
+		$Cursor.set_visible(true)
+	
 	add_child(shoot_timer)
 	shoot_timer.connect("timeout", _set_moving_state.bind(true))
 
@@ -46,11 +59,11 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	if state == MovingState.DIE:
 		return
 
-	var input_movement = Vector3.ZERO
+	var input_movement = _input.input_movement
 	var forward = basis.z.normalized()
 
 	var speed = SPEED
@@ -58,28 +71,19 @@ func _process(delta):
 	if camera_root:
 		forward = camera_root.basis.z.normalized()
 
-	if Input.is_action_pressed("move_left"):
-		input_movement = input_movement + forward.cross(Vector3.UP)
-	if Input.is_action_pressed("move_right"):
-		input_movement = input_movement - forward.cross(Vector3.UP)
-	if Input.is_action_pressed("move_up"):
-		input_movement = input_movement - forward
-	if Input.is_action_pressed("move_down"):
-		input_movement = input_movement + forward
-	
 	var _is_moving = input_movement.length() > 0
 
 	if state != MovingState.DODGE and not _is_moving:
 		state = MovingState.IDLE
 
 	if _is_moving and state != MovingState.DODGE:
-		if Input.is_action_pressed("run"):
+		if _input.is_running:
 			speed = RUN_SPEED
 			state = MovingState.RUN
 		else:
 			state = MovingState.WALK
 
-	if _is_moving and Input.is_action_just_pressed("dodge") or state == MovingState.DODGE:
+	if _is_moving and _input.is_dodging or state == MovingState.DODGE:
 		state = MovingState.DODGE
 		speed = RUN_SPEED
 
@@ -118,11 +122,11 @@ func _apply_animation():
 func _unjump():
 	state = MovingState.IDLE
 
-func _input(event):
+func _on_input_synchronizer_shooting(val):
 	if state == MovingState.DIE or state == MovingState.DODGE:
 		return
 
-	if event.is_action_pressed("shoot"):
+	if val:
 		anim_player.play("humanoid/shoot")
 		is_shooting = false
 
@@ -133,7 +137,7 @@ func _input(event):
 		b.spawner = self
 		b.position = position + Vector3(0, 0.5, 0)
 		b.rotation = player_root.rotation
-		get_tree().current_scene.add_child(b)
+		get_parent_node_3d().bullet_node.add_child(b)
 
 func _set_moving_state(_state: bool):
 	if _state == false:

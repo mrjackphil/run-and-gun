@@ -1,13 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cocxh54ch64s5"]
+[gd_scene load_steps=10 format=3 uid="uid://cocxh54ch64s5"]
 
-[ext_resource type="PackedScene" uid="uid://c5tsbdo0plwph" path="res://scenes/player.tscn" id="1_dsu1m"]
-[ext_resource type="Script" path="res://scripts/camera_move.gd" id="2_bajsv"]
-[ext_resource type="PackedScene" uid="uid://x13yo1bw52t4" path="res://scenes/cursor.tscn" id="3_58omq"]
-[ext_resource type="Script" path="res://scripts/door_interactable.gd" id="4_xrlpm"]
-[ext_resource type="Shader" path="res://assets/shaders/interactable.gdshader" id="4_yhg4j"]
+[ext_resource type="Shader" path="res://assets/shaders/interactable.gdshader" id="2_rmi60"]
+[ext_resource type="Script" path="res://scripts/door_interactable.gd" id="3_u614r"]
 [ext_resource type="PackedScene" uid="uid://ohqphvq2oxdi" path="res://scenes/enemy.tscn" id="6_elvsp"]
-
-[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_jbuse"]
+[ext_resource type="Script" path="res://scripts/playerspawner.gd" id="7_4vusf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4oed2"]
 
@@ -20,30 +16,35 @@ sky = SubResource("Sky_yeuyl")
 ambient_light_source = 3
 reflected_light_source = 2
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lam1r"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xn85s"]
 render_priority = 0
-shader = ExtResource("4_yhg4j")
+shader = ExtResource("2_rmi60")
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
 shader_parameter/shadow_thickness = 0.0
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fqsf7"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:is_opened")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="World" type="Node3D"]
 
-[node name="Player" parent="." node_paths=PackedStringArray("camera_root", "cursor") instance=ExtResource("1_dsu1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
-camera_root = NodePath("Root")
-cursor = NodePath("../Cursor")
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
+spawn_path = NodePath("../Players")
 
-[node name="Root" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-script = ExtResource("2_bajsv")
+[node name="Players" type="Node3D" parent="." node_paths=PackedStringArray("bullet_node")]
+script = ExtResource("7_4vusf")
+bullet_node = NodePath("../Bullets")
 
-[node name="Yaw" type="SpringArm3D" parent="Player/Root"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
-shape = SubResource("SeparationRayShape3D_jbuse")
-spring_length = 3.0
+[node name="BulletSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/bullet.tscn")
+spawn_path = NodePath("../Bullets")
 
-[node name="Camera3D" type="Camera3D" parent="Player/Root/Yaw"]
-size = 4.809
+[node name="Bullets" type="Node3D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_3njtc")
@@ -79,16 +80,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
 use_collision = true
 size = Vector3(1, 3, 1)
 
-[node name="Cursor" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("3_58omq")]
-camera = NodePath("../Player/Root/Yaw/Camera3D")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="." node_paths=PackedStringArray("geometry_instance_3d")]
+[node name="CSGBox3D6" type="CSGBox3D" parent="Level" node_paths=PackedStringArray("geometry_instance_3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1.45, -4)
-material_overlay = SubResource("ShaderMaterial_lam1r")
+material_overlay = SubResource("ShaderMaterial_xn85s")
 use_collision = true
 size = Vector3(2, 3.1, 1)
-script = ExtResource("4_xrlpm")
+script = ExtResource("3_u614r")
 geometry_instance_3d = NodePath(".")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Level/CSGBox3D6"]
+replication_config = SubResource("SceneReplicationConfig_fqsf7")
 
 [node name="NPC" parent="." instance=ExtResource("6_elvsp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)

@@ -29,4 +29,4 @@ func _move_to_cursor():
 			collider.call("highlight")
 		
 		if collider.has_method("interact") and Input.is_action_just_pressed("interact"):
-			collider.call("interact")
+			collider.interact.rpc()

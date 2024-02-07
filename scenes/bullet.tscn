@@ -1,12 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://btehhxhifibss"]
+[gd_scene load_steps=4 format=3 uid="uid://btehhxhifibss"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_sdxdj"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_elkfx"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lq1te"]
 radius = 0.1
 
 [node name="Bullet" type="Node3D"]
 script = ExtResource("1_sdxdj")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_elkfx")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
 radius = 0.1
